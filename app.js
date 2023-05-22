@@ -20,11 +20,17 @@ const procesos = [
       let colaDeProcesos = procesos.filter(proceso => proceso.tl <= tiempoActual);
   
       if (colaDeProcesos.length > 0) {
-        let procesoActual = colaDeProcesos.reduce((anterior, actual) => actual.tr < anterior.tr ? actual : anterior);
+        let procesoActual = colaDeProcesos.reduce((anterior, actual) => {
+          
+          
+          return actual.tr < anterior.tr ? actual : anterior
+        });
   
         // Verifica si el proceso actual es diferente al proceso anterior
         if (procesoActual !== procesoAnterior) {
-          resultado.push( {p:procesoActual.proceso,tiempoLlegada:tiempoActual}); // Agrega el proceso al arreglo resultado
+
+
+          resultado.push( {p:procesoActual.proceso,tiempoInicio:tiempoActual}); // Agrega el proceso al arreglo resultado
           procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
         }
   
