@@ -47,11 +47,29 @@ const procesos = [
       tiempoActual++;
       // console.log(tiempoActual);
     }
-  
+    
     console.log('Resultado de la planificación SRTF:', resultado);
     console.log('Tiempo total:', tiempoTotal);
+
+    resultado.splice(0, 1); // Elimina la posición 1
+    resultado.splice(2, 1); // Elimina la posición 3
+
+    const tiemposDeEspera = resultado.map((objeto) => objeto.tiempoEspera); // array con tiempos de espera
+    const sumadeTTE = tiemposDeEspera.reduce((total, tiempos) => total+=tiempos, 0);
+    const TEP = (sumadeTTE/5).toFixed(2);
+    console.log('Tiempo de espera promedio ' + TEP);
+
+    const TTP = tiempoTotal + 1.2;
+    console.log('Tiempo total de espera de procecamientos '+ TTP);
+
+    const porcentajeTTP = ((TEP/TTP) * 100).toFixed(2);
+    console.log('Porcentaje ' + porcentajeTTP + '%');
+
   }
-  
+
+
   SRTF(procesos);
+
+
 
 
