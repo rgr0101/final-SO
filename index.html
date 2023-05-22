@@ -23,7 +23,7 @@
     </div>
 
     <div class="main">
-      <h3>SIMULACION DE LA APLICACION DEL ALGORITMO SRTF</h3>
+      <h3>SIMULACION DE LA APLICACION DEL ALGORITMO SRTF</h3
       <br />
       <br />
 
@@ -71,7 +71,6 @@
 
       <br />
       <br />
-
       <div class="gantt">
         <div id="P1" class="gantt-bar">P1</div>
         <div id="P2" class="gantt-bar">P2</div>
@@ -79,6 +78,48 @@
         <div id="P4" class="gantt-bar">P4</div>
         <div id="P5" class="gantt-bar">P5</div>
       </div>
+      
+      <button id="boton-actualizar">Mostrar elementos</button>
+      
+      <script>
+        // Obtener el contenedor de los elementos gantt
+        const contenedorGantt = document.querySelector('.gantt');
+        
+        // Obtener los elementos con la clase "gantt-bar"
+        const barrasGantt = Array.from(document.querySelectorAll('.gantt-bar'));
+        
+        // Variable para realizar un seguimiento del índice del elemento actual
+        let indiceElemento = 0;
+        
+        // Función para mostrar el siguiente elemento
+        function mostrarSiguienteElemento() {
+            for (var i = 0; i < 9; i++) {
+                
+            }
+          if (indiceElemento < barrasGantt.length) {
+            const elementoActual = barrasGantt[indiceElemento];
+            elementoActual.style.display = "block";
+            indiceElemento++;
+          } else {
+            alert("¡Todos los elementos han sido mostrados!");
+            botonActualizar.disabled = true;
+          }
+        }
+        
+        // Obtener el botón
+        const botonActualizar = document.getElementById('boton-actualizar');
+        
+        // Agregar un event listener al botón para llamar a la función cuando se presione
+        botonActualizar.addEventListener('click', mostrarSiguienteElemento);
+      </script>
+      
+      <style>
+        .gantt-bar {
+          display: none;
+        }
+      </style>
+      
+
 
       <div class="calculos">
         <h3>
@@ -103,5 +144,3 @@
     </div>
   </body>
 </html>
-
-
