@@ -36,7 +36,7 @@ const procesos = [
       }
   
       tiempoActual++;
-      console.log(tiempoActual);
+      // console.log(tiempoActual);
     }
   
     console.log('Resultado de la planificación SRTF:', resultado);
@@ -44,4 +44,3 @@ const procesos = [
   }
   
   SRTF(procesos);
-  
