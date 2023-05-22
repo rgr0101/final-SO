@@ -7,6 +7,9 @@ const procesos = [
   { proceso: "p5", tl: 15, tr: 6 },
 ];
 
+const procesosAntes = procesos.map((objeto) => objeto.proceso);
+const segundosLlega = procesos.map((proceso) => proceso.tl.toString());
+
 var orden = [];
 // Calcula tiempo total
 const tiempoTotal = procesos.reduce((total, proceso) => total + proceso.tr, 0);
@@ -56,7 +59,7 @@ function SRTF(procesos = []) {
 
 SRTF(procesos);
 const soloProcesos = orden.map((objeto) => objeto.p);
-const procesosAntes = procesos.map((objeto) => objeto.p);
+
 
 //impresion resultados
 
@@ -69,12 +72,58 @@ const barrasGantt = Array.from(document.querySelectorAll(".gantt-bar"));
 // Variable para realizar un seguimiento del índice del elemento actual
 let indiceElemento = 0;
 
+function explica () {
+    if(indiceElemento == 0){
+        document.getElementById("paso-exp").innerHTML = indiceElemento;
+        document.getElementById("exp1").innerHTML = "Entra " + soloProcesos[indiceElemento];
+        document.getElementById("exp2").innerHTML = "Llega " + procesosAntes[indiceElemento + 1] + " en el segundo " + segundosLlega[indiceElemento + 1];
+        document.getElementById("exp3").innerHTML = "Evalua  ¿" + soloProcesos[indiceElemento] + " es menor que " + procesosAntes[indiceElemento + 1] + "?";
+    }
+    if(indiceElemento == 1){
+        document.getElementById("paso-exp").innerHTML = indiceElemento;
+        document.getElementById("exp1").innerHTML = "Sale " + soloProcesos[indiceElemento - 1];
+        document.getElementById("exp2").innerHTML = "Entra " + soloProcesos[indiceElemento];
+        document.getElementById("exp3").innerHTML = "Llega " + procesosAntes[indiceElemento + 1] + " en el segundo " + segundosLlega[indiceElemento + 1];
+        document.getElementById("exp4").innerHTML = "Evalua  ¿" + soloProcesos[indiceElemento] + " es menor que " + procesosAntes[indiceElemento + 1] + "?";
+        document.getElementById("exp5").innerHTML = "Continua " + soloProcesos[indiceElemento];
+    }
+    if(indiceElemento == 2){
+        document.getElementById("paso-exp").innerHTML = indiceElemento;
+        document.getElementById("exp1").innerHTML = "Termina " + soloProcesos[indiceElemento - 1];
+        document.getElementById("exp2").innerHTML = "Entra " + soloProcesos[indiceElemento];
+        document.getElementById("exp3").innerHTML = "Termina " + soloProcesos[indiceElemento];
+        document.getElementById("exp4").innerHTML = "Entra de nuevo " + soloProcesos[indiceElemento - 2];
+        document.getElementById("exp5").innerHTML = "Llega " + procesosAntes[indiceElemento + 1] + " en el segundo " + segundosLlega[indiceElemento + 1];
+        document.getElementById("exp6").innerHTML = "Evalua  ¿" + soloProcesos[indiceElemento -2 ] + " es menor que " + procesosAntes[indiceElemento + 1] + "?";
+    }
+    if(indiceElemento == 3){
+        document.getElementById("exp1").innerHTML = "Entra " + soloProcesos[indiceElemento];
+        document.getElementById("exp2").innerHTML = "Termina " + soloProcesos[indiceElemento];
+        
+    }
+    if(indiceElemento == 4){
+        document.getElementById("exp1").innerHTML = "Entra de nuevo " + soloProcesos[indiceElemento - 3];
+        document.getElementById("exp2").innerHTML = "Llega " + procesosAntes[indiceElemento + 1] + " en el segundo " + segundosLlega[indiceElemento + 1];
+        document.getElementById("exp3").innerHTML = "Evalua  ¿" + soloProcesos[indiceElemento - 2] + " es menor que " + procesosAntes[indiceElemento + 1] + "?";
+        document.getElementById("exp4").innerHTML = "Continua " + soloProcesos[indiceElemento - 2];
+
+    }
+    if(indiceElemento == 5){
+        document.getElementById("exp1").innerHTML = "Entra " + soloProcesos[indiceElemento];
+        document.getElementById("exp2").innerHTML = "Termina " + soloProcesos[indiceElemento];
+    }
+}
+
 // Función para mostrar el siguiente elemento
 function mostrarSiguienteElemento() {
   if (indiceElemento < barrasGantt.length) {
     const elementoActual = barrasGantt[indiceElemento];
       elementoActual.style.display = "block";
     document.getElementById("paso").innerHTML = indiceElemento;
+
+    //imprime explicacion
+    explica();
+
     indiceElemento++;
   } else {
     alert("¡Todos los elementos han sido mostrados!");
@@ -82,9 +131,7 @@ function mostrarSiguienteElemento() {
   }
   switch (indiceElemento) {
     case 0:
-      document.getElementById("P1").innerHTML = soloProcesos[indiceElemento];
-      document.getElementById("exp1").innerHTML = soloProcesos[indiceElemento]
-      
+      document.getElementById("P1").innerHTML = soloProcesos[indiceElemento];      
       break;
     case 1:
       document.getElementById("P2").innerHTML = soloProcesos[indiceElemento];
@@ -105,6 +152,8 @@ function mostrarSiguienteElemento() {
       document.getElementById("P7").innerHTML = soloProcesos[indiceElemento];
       break;
   }
+
+  
   
 }
 
