@@ -125,6 +125,8 @@
 
 
       <div class="calculos">
+        <button id="botonOculto" onclick="mostrarOcultarBotonReiniciar()" style="display: none;">Mostrar Resultados</button>
+
         <h3>
           Calculo de tiempos. El cambio de contexto se realiza en 0.2
           milisegundos.
@@ -132,19 +134,23 @@
 
         <p>a) Tiempo de espera de cada proceso:</p>
         <div class="procesos">
-          <p>P1=</p>
-          <p>P1=</p>
-          <p>P1=</p>
-          <p>P1=</p>
-          <p>P1=</p>
-          <p>P1=</p>
+          <p id="t-1">P1=</p>
+          <p id="t-2">P1=</p>
+          <p id="t-3">P1=</p>
+          <p id="t-4">P1=</p>
+          <p id="t-5">P1=</p>
+          <p id="t-6">P1=</p>
         </div>
 
         <p>b) Tiempo de espera promedio de todos los procesos (TEP):</p>
         <p>c) Tiempo total de procesamiento d todos los procesos (TTP):</p>
         <p>d) Porcentaje TTP que consume el TEP:</p>
       </div>
+      <br> <br>
+      <button id="boton-reiniciar" onclick="recargarPagina()" style="display: none; background-color: red; color: #fff;">REINICIAR</button>
     </div>
+
+
   </body>
 
   <footer>
