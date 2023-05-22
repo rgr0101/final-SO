@@ -12,6 +12,7 @@ const procesos = [
   
   function SRTF(procesos = []) {
     let tiempoActual = 0;
+    let tiempoEspera = 0;
     let resultado = [];
     let procesoAnterior = null; // Almcena el proceso anteriormente ejecutado
   
@@ -20,17 +21,13 @@ const procesos = [
       let colaDeProcesos = procesos.filter(proceso => proceso.tl <= tiempoActual);
   
       if (colaDeProcesos.length > 0) {
-        let procesoActual = colaDeProcesos.reduce((anterior, actual) => {
-          
-          
-          return actual.tr < anterior.tr ? actual : anterior
-        });
+        let procesoActual = colaDeProcesos.reduce((anterior, actual) => actual.tr < anterior.tr ? actual : anterior);
   
         // Verifica si el proceso actual es diferente al proceso anterior
         if (procesoActual !== procesoAnterior) {
-
-
-          resultado.push( {p:procesoActual.proceso,tiempoInicio:tiempoActual}); // Agrega el proceso al arreglo resultado
+          let tiempoEspera = 0;
+          tiempoEspera += (tiempoActual - procesoActual.tl) + .2 ;
+          resultado.push( {p:procesoActual.proceso,tiempoInicio:tiempoActual,tiempoEspera}); // Agrega el proceso al arreglo resultado
           procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
         }
   
