@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto - Sistemas Operativos</title>
 
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="titulo">
+      <div class="waviy">
+        <span style="--i: 1">S</span>
+        <span style="--i: 2">R</span>
+        <span style="--i: 3">T</span>
+        <span style="--i: 4">F</span>
+      </div>
+      <br>
+      <h1>Sistemas Operativos LCC</h1>
+      <br>
+      <h1>Facultad de Matematicas UADY</h1>
+    </div>
+
+    <div class="main">
+      <h3>SIMULACION DE LA APLICACION DEL ALGORITMO SRTF</h3
+      <br />
+      <br />
+
+      <div class="container-tabla">
+        <table>
+          <thead>
+            <tr>
+              <th>Progreso</th>
+              <th data-priority="1">Tiempo de llegada</th>
+              <th data-priority="2">Tiempo de rafaga</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P1</td>
+              <td>0</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>P2</td>
+              <td>3</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td>P3</td>
+              <td>6</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>P4</td>
+              <td>10</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>P5</td>
+              <td>15</td>
+              <td>6</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <br />
+      <br />
+      <div class="gantt">
+        <div id="P1" class="gantt-bar">P1</div>
+        <div id="P2" class="gantt-bar">P2</div>
+        <div id="P3" class="gantt-bar">P3</div>
+        <div id="P4" class="gantt-bar">P4</div>
+        <div id="P5" class="gantt-bar">P5</div>
+      </div>
+      
+      <button id="boton-actualizar">Mostrar elementos</button>
+      
+      <script>
+        // Obtener el contenedor de los elementos gantt
+        const contenedorGantt = document.querySelector('.gantt');
+        
+        // Obtener los elementos con la clase "gantt-bar"
+        const barrasGantt = Array.from(document.querySelectorAll('.gantt-bar'));
+        
+        // Variable para realizar un seguimiento del índice del elemento actual
+        let indiceElemento = 0;
+        
+        // Función para mostrar el siguiente elemento
+        function mostrarSiguienteElemento() {
+            for (var i = 0; i < 9; i++) {
+                
+            }
+          if (indiceElemento < barrasGantt.length) {
+            const elementoActual = barrasGantt[indiceElemento];
+            elementoActual.style.display = "block";
+            indiceElemento++;
+          } else {
+            alert("¡Todos los elementos han sido mostrados!");
+            botonActualizar.disabled = true;
+          }
+        }
+        
+        // Obtener el botón
+        const botonActualizar = document.getElementById('boton-actualizar');
+        
+        // Agregar un event listener al botón para llamar a la función cuando se presione
+        botonActualizar.addEventListener('click', mostrarSiguienteElemento);
+      </script>
+      
+      <style>
+        .gantt-bar {
+          display: none;
+        }
+      </style>
+      
+
+
+      <div class="calculos">
+        <h3>
+          Calculo de tiempos. El cambio de contexto se realiza en 0.2
+          milisegundos.
+        </h3>
+
+        <p>a) Tiempo de espera de cada proceso:</p>
+        <div class="procesos">
+          <p>P1=</p>
+          <p>P1=</p>
+          <p>P1=</p>
+          <p>P1=</p>
+          <p>P1=</p>
+          <p>P1=</p>
+        </div>
+
+        <p>b) Tiempo de espera promedio de todos los procesos (TEP):</p>
+        <p>c) Tiempo total de procesamiento d todos los procesos (TTP):</p>
+        <p>d) Porcentaje TTP que consume el TEP:</p>
+      </div>
+    </div>
+  </body>
+</html>
