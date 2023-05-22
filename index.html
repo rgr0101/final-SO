@@ -70,48 +70,46 @@
       </div>
 
       <br />
+      <button id="boton-actualizar">Paso <strong id="paso"></strong></button>
       <br />
       <div class="gantt">
         <div id="P1" class="gantt-bar">P1</div>
         <div id="P2" class="gantt-bar">P2</div>
         <div id="P3" class="gantt-bar">P3</div>
-        <div id="P4" class="gantt-bar">P4</div>
-        <div id="P5" class="gantt-bar">P5</div>
+        <div id="P4" class="gantt-bar">P1</div>
+        <div id="P5" class="gantt-bar">P4</div>
+        <div id="P6" class="gantt-bar">P1</div>
+        <div id="P7" class="gantt-bar">P5</div>
       </div>
       
-      <button id="boton-actualizar">Mostrar elementos</button>
+      <div class="tiempos-gantt">
+        <div id="P1-g" class="gantt-linea"></div>
+        <div id="P2-g" class="gantt-linea"></div>
+        <div id="P3-g" class="gantt-linea"></div>
+        <div id="P4-g" class="gantt-linea"></div>
+        <div id="P5-g" class="gantt-linea"></div>
+        <div id="P6" class="gantt-linea"></div>
+        <div id="P5" class="gantt-linea"></div>
+        
+      </div>
+      <div class="valores-gantt">
+        <div id="P1-g" class="gantt-valores"> 3</div>
+        <div id="P2-g" class="gantt-valores"> 7</div>
+        <div id="P3-g" class="gantt-valores"> 9</div>
+        <div id="P4-g" class="gantt-valores">10</div>
+        <div id="P5-g" class="gantt-valores">13</div>
+        <div id="P6" class="gantt-valores">17</div>
+        <div id="P5" class="gantt-valores">23</div>
+        
+      </div>
+
+      <div class="explica">
+        <h5 id="paso-exp">Paso </h5>
+        <div id="exp1"></div>
+      </div>
       
-      <script>
-        // Obtener el contenedor de los elementos gantt
-        const contenedorGantt = document.querySelector('.gantt');
-        
-        // Obtener los elementos con la clase "gantt-bar"
-        const barrasGantt = Array.from(document.querySelectorAll('.gantt-bar'));
-        
-        // Variable para realizar un seguimiento del índice del elemento actual
-        let indiceElemento = 0;
-        
-        // Función para mostrar el siguiente elemento
-        function mostrarSiguienteElemento() {
-            for (var i = 0; i < 9; i++) {
-                
-            }
-          if (indiceElemento < barrasGantt.length) {
-            const elementoActual = barrasGantt[indiceElemento];
-            elementoActual.style.display = "block";
-            indiceElemento++;
-          } else {
-            alert("¡Todos los elementos han sido mostrados!");
-            botonActualizar.disabled = true;
-          }
-        }
-        
-        // Obtener el botón
-        const botonActualizar = document.getElementById('boton-actualizar');
-        
-        // Agregar un event listener al botón para llamar a la función cuando se presione
-        botonActualizar.addEventListener('click', mostrarSiguienteElemento);
-      </script>
+      
+            
       
       <style>
         .gantt-bar {
@@ -143,4 +141,16 @@
       </div>
     </div>
   </body>
+
+  <footer>
+    <div class="integrantes">
+      <p>Hecho por: </p>
+      <p>Roger Alejandro Pacheco Yama</p>
+      <p>Jafet Andree Mena Solis</p>
+      <p>Roger Alejandro Pacheco Yama</p>
+      <p>Jafet Andree Mena Solis</p>
+
+    </div>
+  </footer>
+  <script src="/script.js"></script>
 </html>
