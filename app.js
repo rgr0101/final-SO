@@ -24,7 +24,7 @@ const procesos = [
   
         // Verifica si el proceso actual es diferente al proceso anterior
         if (procesoActual !== procesoAnterior) {
-          resultado.push(procesoActual.proceso); // Agrega el proceso al arreglo resultado
+          resultado.push( {p:procesoActual.proceso,tiempoLlegada:tiempoActual}); // Agrega el proceso al arreglo resultado
           procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
         }
   
