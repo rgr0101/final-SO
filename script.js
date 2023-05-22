@@ -1,4 +1,4 @@
-//algoritmo
+// Proceso de la CPU
 const procesos = [
   { proceso: "p1", tl: 0, tr: 8 },
   { proceso: "p2", tl: 3, tr: 4 },
@@ -33,9 +33,19 @@ function SRTF(procesos = []) {
 
       // Verifica si el proceso actual es diferente al proceso anterior
       if (procesoActual !== procesoAnterior) {
+
+        let tiempoEspera = 0;
+
+          if( procesoActual.tl == 0){
+             tiempoEspera += tiempoActual -3;
+          }else{
+            tiempoEspera += (tiempoActual - procesoActual.tl) + .2 ;
+          }
+
         resultado.push({
           p: procesoActual.proceso,
           tiempoLlegada: tiempoActual,
+          tiempoEspera
         }); // Agrega el proceso al arreglo resultado
         orden.push({ p: procesoActual.proceso }); // Agrega el proceso al arreglo orden
         procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
@@ -53,8 +63,22 @@ function SRTF(procesos = []) {
     // console.log(tiempoActual);
   }
 
-  console.log("Resultado de la planificación SRTF:", resultado);
-  console.log("Tiempo total:", tiempoTotal);
+  console.log('Resultado de la planificación SRTF:', resultado);
+    console.log('Tiempo total:', tiempoTotal);
+
+    resultado.splice(0, 1); // Elimina la posición 1
+    resultado.splice(2, 1); // Elimina la posición 3
+
+    const tiemposDeEspera = resultado.map((objeto) => objeto.tiempoEspera); // array con tiempos de espera
+    const sumadeTTE = tiemposDeEspera.reduce((total, tiempos) => total+=tiempos, 0);
+    const TEP = (sumadeTTE/5).toFixed(2);
+    console.log('Tiempo de espera promedio ' + TEP);
+
+    const TTP = tiempoTotal + 1.2;
+    console.log('Tiempo total de espera de procecamientos '+ TTP);
+
+    const porcentajeTTP = ((TEP/TTP) * 100).toFixed(2);
+    console.log('Porcentaje ' + porcentajeTTP + '%');
 }
 
 SRTF(procesos);

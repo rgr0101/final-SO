@@ -22,7 +22,7 @@ const procesos = [
   
       if (colaDeProcesos.length > 0) {
         let procesoActual = colaDeProcesos.reduce((anterior, actual) => actual.tr < anterior.tr ? actual : anterior);
-  
+   
         // Verifica si el proceso actual es diferente al proceso anterior
         if (procesoActual !== procesoAnterior) {
           let tiempoEspera = 0;
