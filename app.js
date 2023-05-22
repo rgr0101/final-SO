@@ -26,7 +26,13 @@ const procesos = [
         // Verifica si el proceso actual es diferente al proceso anterior
         if (procesoActual !== procesoAnterior) {
           let tiempoEspera = 0;
-          tiempoEspera += (tiempoActual - procesoActual.tl) + .2 ;
+
+          if( procesoActual.tl == 0){
+             tiempoEspera += tiempoActual -3;
+          }else{
+            tiempoEspera += (tiempoActual - procesoActual.tl) + .2 ;
+          }
+          
           resultado.push( {p:procesoActual.proceso,tiempoInicio:tiempoActual,tiempoEspera}); // Agrega el proceso al arreglo resultado
           procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
         }
@@ -47,3 +53,5 @@ const procesos = [
   }
   
   SRTF(procesos);
+
+
