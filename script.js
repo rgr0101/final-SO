@@ -14,10 +14,10 @@ var orden = [];
 var tiempoActual = 0;
 // Calcula tiempo total
 const tiempoTotal = procesos.reduce((total, proceso) => total + proceso.tr, 0);
-
+let resultado = [];
 function SRTF(procesos = []) {
   
-  let resultado = [];
+  
   let procesoAnterior = null; // Almcena el proceso anteriormente ejecutado
 
   while (procesos.length > 0) {
@@ -34,9 +34,19 @@ function SRTF(procesos = []) {
 
       // Verifica si el proceso actual es diferente al proceso anterior
       if (procesoActual !== procesoAnterior) {
+
+        let tiempoEspera = 0;
+
+          if( procesoActual.tl == 0){
+             tiempoEspera += tiempoActual -3;
+          }else{
+            tiempoEspera += (tiempoActual - procesoActual.tl) + .2 ;
+          }
+
         resultado.push({
           p: procesoActual.proceso,
           tiempoLlegada: tiempoActual,
+          tiempoEspera
         }); // Agrega el proceso al arreglo resultado
         orden.push({ p: procesoActual.proceso }); // Agrega el proceso al arreglo orden
         procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
@@ -56,9 +66,26 @@ function SRTF(procesos = []) {
 
   console.log("Resultado de la planificación SRTF:", resultado);
   console.log("Tiempo total:", tiempoTotal);
+
+  resultado.splice(0, 1); // Elimina la posición 1
+    resultado.splice(2, 1); // Elimina la posición 3
+
+    
 }
 
 SRTF(procesos);
+
+const tiemposDeEspera = resultado.map((objeto) => objeto.tiempoEspera); // array con tiempos de espera
+  console.log(tiemposDeEspera);
+const sumadeTTE = tiemposDeEspera.reduce((total, tiempos) => total+=tiempos, 0);
+    const TEP = (sumadeTTE/5).toFixed(2);
+    console.log('Tiempo de espera promedio ' + TEP);
+
+    const TTP = tiempoTotal + 1.2;
+    console.log('Tiempo total de espera de procecamientos '+ TTP);
+
+    const PTTP = ((TEP/TTP) * 100).toFixed(2);
+    console.log('Porcentaje ' + PTTP + '%');
 const soloProcesos = orden.map((objeto) => objeto.p);
 
 //impresion resultados
@@ -255,22 +282,13 @@ function mostrarOcultarBoton() {
   }
 
   function calculos() {
-    for (let i = 0; i < tiemposDeEspera.length; i++) {
-        if (i == 0) {
-            document.getElementById("t-2").innerHTML = indiceElemento;
-        }
-        if (i == 1) {
-            document.getElementById("t-3").innerHTML = tiemposDeEspera[i];
-        }
-        if (i == 2) {
-            document.getElementById("t-4").innerHTML = tiemposDeEspera[i];
-            
-        }
-        if (i == 3) {
-            document.getElementById("t-1").innerHTML = tiemposDeEspera[i];
-        }
-        if (i == 5) {
-            
-        }
-      }
+    document.getElementById("t-1").innerHTML +=  ` ${tiemposDeEspera[3] }`;
+    document.getElementById("t-2").innerHTML += ` ${tiemposDeEspera[2]}`;
+    document.getElementById("t-3").innerHTML += ` ${tiemposDeEspera[1]}`;
+    document.getElementById("t-4").innerHTML += ` ${tiemposDeEspera[0]}`;
+    document.getElementById("t-5").innerHTML += ` ${tiemposDeEspera[4]}`;
+
+    document.getElementById("TEP").innerHTML += ` ${TEP}`;
+    document.getElementById("TTP").innerHTML += ` ${TTP}`;
+    document.getElementById("PTTP").innerHTML += ` ${PTTP}% `;
 }
