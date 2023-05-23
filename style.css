@@ -1,3 +1,12 @@
+/*
+INTEGRANTES:
+ROGER ALEJANDRO PACHECO YAMA
+JAFET ANDREE MENA SOLÍS
+JUAN ENRIQUE AYALA GASPAR
+GASPAR ALONSO CARDOS UC
+*/
+
+/*Estilos CSS*/
 * {
   margin: 0;
   padding: 0;
@@ -24,7 +33,7 @@ body {
   background-image: linear-gradient(
     -45deg,
     #2c3333 0%,
-    #2e4f4f 25%,
+    #E57C23 25%,
     #0e8388 51%,
     #cbe4de 100%
   );
@@ -150,6 +159,7 @@ td {
   display: flex;
   justify-content: end;
   padding: 3rem;
+  padding-bottom: 1px;
   border-top: 4px solid #46c2cb;
   border-right: 4px solid #46c2cb;;
   transition: all 0.3s ease;
@@ -168,8 +178,6 @@ td {
 .gantt-valores {
   display: flex;
   justify-content: end;
-  border-top: 4px solid #46c2cb;
-  border-right: 4px solid #46c2cb;;
   transition: all 0.3s ease;
   margin-left: 4.2rem;
 }
@@ -177,6 +185,8 @@ td {
 
 /*botones*/
 button {
+  color: #fff;
+  font-size: 2rem;
   margin: 1rem;
   border: none;
   text-decoration: none;
@@ -221,4 +231,8 @@ footer {
   color: #000;
   margin: 3rem;
   padding: 3rem;
+  border-radius: 10px;
+  -webkit-box-shadow: 11px 7px 0px 1px rgba(202,216,252,0.54);
+-moz-box-shadow: 11px 7px 0px 1px rgba(202,216,252,0.54);
+box-shadow: 11px 7px 0px 1px rgba(202,216,252,0.54);
 }
