@@ -19,11 +19,11 @@
       <br>
       <h1>Sistemas Operativos LCC</h1>
       <br>
-      <h1>Facultad de Matematicas UADY</h1>
+      <h1>Facultad de Matemáticas UADY</h1>
     </div>
 
     <div class="main">
-      <h3>SIMULACION DE LA APLICACION DEL ALGORITMO SRTF</h3
+      <h3>SIMULACIÓN DE LA APLICACIÓN DEL ALGORITMO SRTF</h3
       <br />
       <br />
 
@@ -33,7 +33,7 @@
             <tr>
               <th>Progreso</th>
               <th data-priority="1">Tiempo de llegada</th>
-              <th data-priority="2">Tiempo de rafaga</th>
+              <th data-priority="2">Tiempo de ráfaga</th>
             </tr>
           </thead>
           <tbody>
@@ -71,6 +71,8 @@
 
       <br />
       <button id="boton-actualizar">Paso <strong id="paso"></strong></button>
+      <br>
+      <h2>Gráfico de Gantt</h2>
       <br />
       <div class="gantt">
         <div id="P1" class="gantt-bar">P1</div>
@@ -90,21 +92,20 @@
         <div id="P5-g" class="gantt-linea"></div>
         <div id="P6" class="gantt-linea"></div>
         <div id="P5" class="gantt-linea"></div>
-        
       </div>
+
       <div class="valores-gantt">
-        <div id="P1-g" class="gantt-valores"> 3</div>
-        <div id="P2-g" class="gantt-valores"> 7</div>
-        <div id="P3-g" class="gantt-valores"> 9</div>
-        <div id="P4-g" class="gantt-valores">10</div>
-        <div id="P5-g" class="gantt-valores">13</div>
-        <div id="P6" class="gantt-valores">17</div>
-        <div id="P5" class="gantt-valores">23</div>
-        
+        <div id="" class="gantt-valores"> >3</div>
+        <div id="" class="gantt-valores"> >7</div>
+        <div id="" class="gantt-valores"> >9</div>
+        <div id="" class="gantt-valores"> 10</div>
+        <div id="" class="gantt-valores"> 13</div>
+        <div id="" class="gantt-valores"> 17</div>
+        <div id="" class="gantt-valores"> 23</div>     
       </div>
 
       <div class="explica">
-        <p>Explicacion paso # <strong class="exp" id="paso-exp"></strong></p>
+        <p>Explicación paso # <strong class="exp" id="paso-exp"></strong></p>
         <div class="exp" id="exp1"></div>
         <div class="exp" id="exp2"></div>
         <div class="exp" id="exp3"></div>
@@ -120,15 +121,27 @@
         .gantt-bar {
           display: none;
         }
+
+        .gantt-valores {
+          display: none;
+        }
+
+        .gantt-linea {
+          display: none;
+        }
       </style>
       
 
-
-      <div class="calculos">
+      <div class="boton2" style="display: flex; justify-content: center;">
         <button id="botonOculto" onclick="mostrarOcultarBotonReiniciar()" style="display: none;">Mostrar Resultados</button>
+      </div>
+
+      
+      <div class="calculos">
+        
 
         <h3>
-          Calculo de tiempos. El cambio de contexto se realiza en 0.2
+          Cólculo de tiempos. El cambio de contexto se realiza en 0.2
           milisegundos.
         </h3>
 
@@ -142,9 +155,9 @@
           
         </div>
 
-        <p>b) Tiempo de espera promedio de todos los procesos (TEP):</p>
-        <p>c) Tiempo total de procesamiento d todos los procesos (TTP):</p>
-        <p>d) Porcentaje TTP que consume el TEP:</p>
+        <p id="TEP">b) Tiempo de espera promedio de todos los procesos (TEP):</p>
+        <p id="TTP">c) Tiempo total de procesamiento d todos los procesos (TTP):</p>
+        <p id="PTTP">d) Porcentaje TTP que consume el TEP:</p>
       </div>
       <br> <br>
       <button id="boton-reiniciar" onclick="recargarPagina()" style="display: none; background-color: red; color: #fff;">REINICIAR</button>
@@ -158,8 +171,8 @@
       <p>Hecho por: </p>
       <p>Roger Alejandro Pacheco Yama</p>
       <p>Jafet Andree Mena Solis</p>
-      <p>Roger Alejandro Pacheco Yama</p>
-      <p>Jafet Andree Mena Solis</p>
+      <p>Juan Enrique Ayala Gaspar</p>
+      <p>Gaspara Alonso Cardos Uc</p>
 
     </div>
   </footer>
