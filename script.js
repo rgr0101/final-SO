@@ -1,4 +1,13 @@
-//algoritmo
+/*
+INTEGRANTES:
+ROGER ALEJANDRO PACHECO YAMA
+JAFET ANDREE MENA SOLÍS
+JUAN ENRIQUE AYALA GASPAR
+GASPAR ALONSO CARDOS UC
+*/ 
+
+// Agoritmo SRTF
+// Crea arreglo con los proceos y timepos iniciales
 const procesos = [
   { proceso: "p1", tl: 0, tr: 8 },
   { proceso: "p2", tl: 3, tr: 4 },
@@ -12,12 +21,13 @@ const segundosLlega = procesos.map((proceso) => proceso.tl.toString());
 
 var orden = [];
 var tiempoActual = 0;
+
 // Calcula tiempo total
 const tiempoTotal = procesos.reduce((total, proceso) => total + proceso.tr, 0);
+let resultado = [];
 
+// Funcion que recibe como parametro un arreglo para aplicarle el algoritmo
 function SRTF(procesos = []) {
-  
-  let resultado = [];
   let procesoAnterior = null; // Almcena el proceso anteriormente ejecutado
 
   while (procesos.length > 0) {
@@ -27,22 +37,31 @@ function SRTF(procesos = []) {
     );
 
     if (colaDeProcesos.length > 0) {
-      //verifica que el proceso actual es menor al entrante
+      // Verifica que el proceso actual es menor al entrante
       let procesoActual = colaDeProcesos.reduce((anterior, actual) =>
         actual.tr < anterior.tr ? actual : anterior
       );
 
       // Verifica si el proceso actual es diferente al proceso anterior
       if (procesoActual !== procesoAnterior) {
+        let tiempoEspera = 0;
+
+        if (procesoActual.tl == 0) {
+          tiempoEspera += tiempoActual - 3;
+        } else {
+          tiempoEspera += tiempoActual - procesoActual.tl + 0.2;
+        }
+
         resultado.push({
           p: procesoActual.proceso,
           tiempoLlegada: tiempoActual,
+          tiempoEspera,
         }); // Agrega el proceso al arreglo resultado
         orden.push({ p: procesoActual.proceso }); // Agrega el proceso al arreglo orden
         procesoAnterior = procesoActual; // Actualiza el proceso anterior con el proceso actual
       }
 
-      procesoActual.tr--; // Reudicemos tr = tiempo restant
+      procesoActual.tr--; // tr = tiempo restant
 
       if (procesoActual.tr === 0) {
         // Si se acabo el tr lo podemos sacar de la cola de procesos
@@ -51,27 +70,50 @@ function SRTF(procesos = []) {
     }
 
     tiempoActual++;
-    // console.log(tiempoActual);
+    // prueba para verificar tiempo actual console.log(tiempoActual);
   }
-
+  // Imprimir por consola los resultados, como una prueba
   console.log("Resultado de la planificación SRTF:", resultado);
   console.log("Tiempo total:", tiempoTotal);
+
+  resultado.splice(0, 1); // Elimina la posición 1
+  resultado.splice(2, 1); // Elimina la posición 3
 }
 
+// Ejecutamos la funcion pasandole el arreglo de procesos inicial
 SRTF(procesos);
+
+// Preparamos los resultados para imprimirlos en HTML
+const tiemposDeEspera = resultado.map((objeto) => objeto.tiempoEspera); // Array con tiempos de espera
+console.log(tiemposDeEspera);
+const sumadeTTE = tiemposDeEspera.reduce(
+  (total, tiempos) => (total += tiempos),
+  0
+);
+const TEP = (sumadeTTE / 5).toFixed(2);
+console.log("Tiempo de espera promedio " + TEP);
+
+const TTP = tiempoTotal + 1.2;
+console.log("Tiempo total de espera de procecamientos " + TTP);
+
+const PTTP = ((TEP / TTP) * 100).toFixed(2);
+console.log("Porcentaje " + PTTP + "%");
 const soloProcesos = orden.map((objeto) => objeto.p);
 
-//impresion resultados
+// Impresion resultados
 
 // Obtener el contenedor de los elementos gantt
 const contenedorGantt = document.querySelector(".gantt");
 
 // Obtener los elementos con la clase "gantt-bar"
 const barrasGantt = Array.from(document.querySelectorAll(".gantt-bar"));
+const lineasGantt = Array.from(document.querySelectorAll(".gantt-linea"));
+const valoresGantt = Array.from(document.querySelectorAll(".gantt-valores"));
 
 // Variable para realizar un seguimiento del índice del elemento actual
 let indiceElemento = 0;
 
+// Funcion para imprimir una pequena explicacion
 function explica() {
   if (indiceElemento == 0) {
     document.getElementById("paso-exp").innerHTML = indiceElemento;
@@ -117,9 +159,8 @@ function explica() {
       "Entra " + soloProcesos[indiceElemento];
     document.getElementById("exp3").innerHTML =
       "Termina " + soloProcesos[indiceElemento];
-      document.getElementById("exp4").innerHTML = " ";
-      document.getElementById("exp5").innerHTML = " ";
-    
+    document.getElementById("exp4").innerHTML = " ";
+    document.getElementById("exp5").innerHTML = " ";
   }
 
   if (indiceElemento == 3) {
@@ -174,7 +215,7 @@ function explica() {
       "Entra " + soloProcesos[indiceElemento];
     document.getElementById("exp2").innerHTML =
       "Termina al segundo " + tiempoActual;
-    document.getElementById("exp3").innerHTML = " ";
+    document.getElementById("exp3").innerHTML = "FINALIZA EL ALGORITMO";
     document.getElementById("exp4").innerHTML = " ";
     mostrarOcultarBoton();
   }
@@ -184,15 +225,28 @@ function explica() {
 function mostrarSiguienteElemento() {
   if (indiceElemento < barrasGantt.length) {
     const elementoActual = barrasGantt[indiceElemento];
+    const elementoActual2 = lineasGantt[indiceElemento];
+    const elementoActual3 = valoresGantt[indiceElemento];
+
     elementoActual.style.display = "block";
-    document.getElementById("paso").innerHTML = indiceElemento;
+    elementoActual2.style.display = "block";
+    elementoActual3.style.display = "block";
+    elementoActual.backgroundColor = "red";
+
+    if (indiceElemento == 6) {
+      document.getElementById("paso").innerHTML = "FIN DE LA SIMULACION";
+    } else {
+      document.getElementById("paso").innerHTML = indiceElemento;
+    }
 
     //imprime explicacion
     explica();
 
     indiceElemento++;
   } else {
-    alert("¡Todos los elementos han sido mostrados!");
+    alert(
+      "FIN. PRESIONE EN EL BOTON MOSTRAR RESULTADOS. LUEGO PRESIONE EN EL BOTON =REINICIAR= QUE SE ENCUENTRA AL FINAL PARA REPETIR."
+    );
     botonActualizar.disabled = true;
   }
   switch (indiceElemento) {
@@ -226,51 +280,48 @@ const botonActualizar = document.getElementById("boton-actualizar");
 // Agregar un event listener al botón para llamar a la función cuando se presione
 botonActualizar.addEventListener("click", mostrarSiguienteElemento);
 
-//boton finalizar
+// Boton finalizar
 function mostrarOcultarBoton() {
-    var botonOculto = document.getElementById("botonOculto");
-    
-    if (botonOculto.style.display === "none") {
-      botonOculto.style.display = "block";
-    } else {
-      botonOculto.style.display = "none";
-    }
+  var botonOculto = document.getElementById("botonOculto");
+
+  if (botonOculto.style.display === "none") {
+    botonOculto.style.display = "block";
+  } else {
+    botonOculto.style.display = "none";
+  }
+}
+
+// Boton Reiniciar
+function mostrarOcultarBotonReiniciar() {
+  var botonOculto2 = document.getElementById("boton-reiniciar");
+
+  if (botonOculto2.style.display === "none") {
+    botonOculto2.style.display = "block";
+  } else {
+    botonOculto2.style.display = "none";
   }
 
-  function mostrarOcultarBotonReiniciar() {
-    var botonOculto2 = document.getElementById("boton-reiniciar");
-    
-    if (botonOculto2.style.display === "none") {
-      botonOculto2.style.display = "block";
-    } else {
-      botonOculto2.style.display = "none";
-    }
+  calculos();
+}
 
-    calculos();
-  }
-  
+// Funcion para boton reiniciar
+function recargarPagina() {
+  location.reload();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // Desplazamiento suave
+  });
+}
 
-  function recargarPagina() {
-    location.reload();
-  }
-
-  function calculos() {
-    for (let i = 0; i < tiemposDeEspera.length; i++) {
-        if (i == 0) {
-            document.getElementById("t-2").innerHTML = indiceElemento;
-        }
-        if (i == 1) {
-            document.getElementById("t-3").innerHTML = tiemposDeEspera[i];
-        }
-        if (i == 2) {
-            document.getElementById("t-4").innerHTML = tiemposDeEspera[i];
-            
-        }
-        if (i == 3) {
-            document.getElementById("t-1").innerHTML = tiemposDeEspera[i];
-        }
-        if (i == 5) {
-            
-        }
-      }
+// Impresion final de los calculos a HTML
+function calculos() {
+  document.getElementById("t-1").innerHTML += ` ${tiemposDeEspera[3]}`;
+  document.getElementById("t-2").innerHTML += ` ${tiemposDeEspera[2]}`;
+  document.getElementById("t-3").innerHTML += ` ${tiemposDeEspera[1]}`;
+  document.getElementById("t-4").innerHTML += ` ${tiemposDeEspera[0]}`;
+  document.getElementById("t-5").innerHTML += ` ${tiemposDeEspera[4]}`;
+  document.getElementById("TEP").innerHTML += " 13.8 / 5 = " + ` ${TEP}`;
+  document.getElementById("TTP").innerHTML += ` ${tiemposDeEspera[3]}` + " + "+ ` ${tiemposDeEspera[2]}` + "+" + ` ${tiemposDeEspera[1]}` + " + "+ ` ${tiemposDeEspera[0]}` + "+" + ` ${tiemposDeEspera[4]}`+ " + 1.2 (6 cambios de contexto de 0.2) =" + ` ${TTP}`;
+  document.getElementById("PTTP").innerHTML += ` ${TEP}` + " / " + ` ${TTP}` + " * 100 = " + ` ${PTTP}% `;
+  botonOculto.disabled = true;
 }
